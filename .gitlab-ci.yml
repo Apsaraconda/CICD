@@ -1,0 +1,53 @@
+default:
+  tags: [CICD]
+
+stages:
+  - build
+  - style_test
+  - func_test_cat
+  - func_test_grep
+  - deploy
+
+build:
+  stage: build
+  script:
+  - cd src/grep
+  - make all
+  after_script:
+    - bash src/notify.sh
+  artifacts:
+    paths:
+    - src/cat/s21_cat
+    - src/grep/s21_grep
+    expire_in: 30 day
+
+style_test:
+  stage: style_test
+  script:
+    - bash src/style_test.sh
+  after_script:
+    - bash src/notify.sh
+
+func_test_cat:
+  stage: func_test_cat
+  script:
+    - cd src/cat
+    - make test
+  after_script:
+    - bash src/notify.sh
+
+func_test_grep:
+  stage: func_test_grep
+  script:
+    - cd src/grep
+    - make test
+  after_script:
+    - bash src/notify.sh
+
+deploy:
+  stage: deploy
+  script:
+    - bash src/deploy.sh
+  when: manual
+  after_script:
+    - bash src/notify.sh
