@@ -7,7 +7,7 @@ Development of a simple **CI/CD** for the *SimpleBashUtils* project. Building, t
 
 ##### Download and install **gitlab-runner** on the virtual machine
 
-##### Run **gitlab-runner** and register it for use in the current project (*DO6_CICD*)
+##### Run **gitlab-runner** and register it for use in the current project
 
 ### Part 2. Building
 
